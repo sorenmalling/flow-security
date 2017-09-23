@@ -1,0 +1,80 @@
+Neos\Security\Log\SecurityLoggerInterface:
+  scope: singleton
+  factoryObjectName: Neos\Flow\Log\LoggerFactory
+  arguments:
+    1:
+      value: 'Flow_Security'
+    2:
+      value: 'Neos\Flow\Log\Logger'
+    3:
+      setting: Neos.Security.log.securityLogger.backend
+    4:
+      setting: Neos.Security.log.securityLogger.backendOptions
+
+Neos\Security\Authentication\AuthenticationManagerInterface:
+  className: Neos\Security\Authentication\AuthenticationProviderManager
+
+Neos\Security\Cryptography\RsaWalletServiceInterface:
+  className: Neos\Security\Cryptography\RsaWalletServicePhp
+  scope: singleton
+  properties:
+    keystoreCache:
+      object:
+        factoryObjectName: Neos\Flow\Cache\CacheManager
+        factoryMethodName: getCache
+        arguments:
+          1:
+            value: Flow_Security_Cryptography_RSAWallet
+
+Neos\Security\Authorization\PrivilegeManagerInterface:
+  className: Neos\Security\Authorization\PrivilegeManager
+
+Neos\Security\Authorization\FirewallInterface:
+  className: Neos\Security\Authorization\FilterFirewall
+
+Neos\Security\Cryptography\HashService:
+  properties:
+    cache:
+      object:
+        factoryObjectName: Neos\Flow\Cache\CacheManager
+        factoryMethodName: getCache
+        arguments:
+          1:
+            value: Flow_Security_Cryptography_HashService
+
+Neos\Security\Cryptography\Pbkdf2HashingStrategy:
+  scope: singleton
+  arguments:
+    1:
+      setting: Neos.Security.cryptography.Pbkdf2HashingStrategy.dynamicSaltLength
+    2:
+      setting: Neos.Security.cryptography.Pbkdf2HashingStrategy.iterationCount
+    3:
+      setting: Neos.Security.cryptography.Pbkdf2HashingStrategy.derivedKeyLength
+    4:
+      setting: Neos.Security.cryptography.Pbkdf2HashingStrategy.algorithm
+
+Neos\Security\Cryptography\BCryptHashingStrategy:
+  scope: singleton
+  arguments:
+    1:
+      setting: Neos.Security.cryptography.BCryptHashingStrategy.cost
+
+Neos\Security\Authorization\Privilege\Method\MethodTargetExpressionParser:
+  scope: singleton
+
+Neos\Security\Authorization\Privilege\Method\MethodPrivilegePointcutFilter:
+  scope: singleton
+  properties:
+    objectManager:
+      object: Neos\Flow\ObjectManagement\ObjectManagerInterface
+
+Neos\Security\Authorization\Privilege\Entity\Doctrine\EntityPrivilegeExpressionEvaluator:
+  properties:
+    expressionCache:
+      object:
+        factoryObjectName: Neos\Flow\Cache\CacheManager
+        factoryMethodName: getCache
+        arguments:
+          1:
+            value: Eel_Expression_Code
