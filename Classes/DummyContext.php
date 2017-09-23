@@ -131,7 +131,7 @@ class DummyContext extends Context
      *
      * If no authenticated roles could be found the "Anonymous" role is returned.
      *
-     * The "Neos.Flow:Everybody" roles is always returned.
+     * The "Neos.Security:Everybody" roles is always returned.
      *
      * @return Role[]
      */
@@ -160,13 +160,13 @@ class DummyContext extends Context
      */
     public function hasRole($roleIdentifier)
     {
-        if ($roleIdentifier === 'Neos.Flow:Everybody') {
+        if ($roleIdentifier === 'Neos.Security:Everybody') {
             return true;
         }
-        if ($roleIdentifier === 'Neos.Flow:Anonymous') {
+        if ($roleIdentifier === 'Neos.Security:Anonymous') {
             return (!empty($this->roles));
         }
-        if ($roleIdentifier === 'Neos.Flow:AuthenticatedUser') {
+        if ($roleIdentifier === 'Neos.Security:AuthenticatedUser') {
             return (empty($this->roles));
         }
 

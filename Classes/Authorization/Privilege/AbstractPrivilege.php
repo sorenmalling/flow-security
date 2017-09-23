@@ -163,7 +163,7 @@ abstract class AbstractPrivilege implements PrivilegeInterface
     }
 
     /**
-     * Unique identifier for the related privilege target (e.g. "Neos.Flow:PublicMethods")
+     * Unique identifier for the related privilege target (e.g. "Neos.Security:PublicMethods")
      *
      * @return string
      */
