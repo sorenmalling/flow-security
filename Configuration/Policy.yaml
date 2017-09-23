@@ -1,0 +1,11 @@
+roles:
+  'Neos.Security:Everybody':
+    abstract: TRUE
+
+  'Neos.Security:Anonymous':
+    abstract: TRUE
+
+  'Neos.Security:AuthenticatedUser':
+    abstract: TRUE
+
+privilegeTargets: []

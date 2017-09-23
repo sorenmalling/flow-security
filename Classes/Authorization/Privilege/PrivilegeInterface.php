@@ -72,7 +72,7 @@ interface PrivilegeInterface extends CacheAwareInterface
     public function getPrivilegeTarget();
 
     /**
-     * Unique name of the related privilege target (for example "Neos.Flow:PublicMethods")
+     * Unique name of the related privilege target (for example "Neos.Security:PublicMethods")
      *
      * @return string
      */

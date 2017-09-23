@@ -33,7 +33,7 @@ class Context
 {
     /**
      * Authenticate as many tokens as possible but do not require
-     * an authenticated token (e.g. for guest users with role Neos.Flow:Everybody).
+     * an authenticated token (e.g. for guest users with role Neos.Security:Everybody).
      */
     const AUTHENTICATE_ANY_TOKEN = 1;
 
@@ -416,7 +416,7 @@ class Context
      *
      * If no authenticated roles could be found the "Anonymous" role is returned.
      *
-     * The "Neos.Flow:Everybody" roles is always returned.
+     * The "Neos.Security:Everybody" roles is always returned.
      *
      * @return Role[]
      */
@@ -427,12 +427,12 @@ class Context
         }
 
         if ($this->roles === null) {
-            $this->roles = ['Neos.Flow:Everybody' => $this->policyService->getRole('Neos.Flow:Everybody')];
+            $this->roles = ['Neos.Security:Everybody' => $this->policyService->getRole('Neos.Security:Everybody')];
 
             if ($this->authenticationManager->isAuthenticated() === false) {
-                $this->roles['Neos.Flow:Anonymous'] = $this->policyService->getRole('Neos.Flow:Anonymous');
+                $this->roles['Neos.Security:Anonymous'] = $this->policyService->getRole('Neos.Security:Anonymous');
             } else {
-                $this->roles['Neos.Flow:AuthenticatedUser'] = $this->policyService->getRole('Neos.Flow:AuthenticatedUser');
+                $this->roles['Neos.Security:AuthenticatedUser'] = $this->policyService->getRole('Neos.Security:AuthenticatedUser');
                 /** @var $token TokenInterface */
                 foreach ($this->getAuthenticationTokens() as $token) {
                     if ($token->isAuthenticated() !== true) {
@@ -473,13 +473,13 @@ class Context
      */
     public function hasRole($roleIdentifier)
     {
-        if ($roleIdentifier === 'Neos.Flow:Everybody') {
+        if ($roleIdentifier === 'Neos.Security:Everybody') {
             return true;
         }
-        if ($roleIdentifier === 'Neos.Flow:Anonymous') {
+        if ($roleIdentifier === 'Neos.Security:Anonymous') {
             return (!$this->authenticationManager->isAuthenticated());
         }
-        if ($roleIdentifier === 'Neos.Flow:AuthenticatedUser') {
+        if ($roleIdentifier === 'Neos.Security:AuthenticatedUser') {
             return ($this->authenticationManager->isAuthenticated());
         }
 

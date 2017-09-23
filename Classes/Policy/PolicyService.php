@@ -103,11 +103,11 @@ class PolicyService
         $privilegeTargetsForEverybody = $this->privilegeTargets;
 
         $this->roles = [];
-        $everybodyRole = new Role('Neos.Flow:Everybody');
+        $everybodyRole = new Role('Neos.Security:Everybody');
         $everybodyRole->setAbstract(true);
         if (isset($this->policyConfiguration['roles'])) {
             foreach ($this->policyConfiguration['roles'] as $roleIdentifier => $roleConfiguration) {
-                if ($roleIdentifier === 'Neos.Flow:Everybody') {
+                if ($roleIdentifier === 'Neos.Security:Everybody') {
                     $role = $everybodyRole;
                 } else {
                     $role = new Role($roleIdentifier);
@@ -134,7 +134,7 @@ class PolicyService
                         }
                         $role->addPrivilege($privilege);
 
-                        if ($roleIdentifier === 'Neos.Flow:Everybody') {
+                        if ($roleIdentifier === 'Neos.Security:Everybody') {
                             unset($privilegeTargetsForEverybody[$privilegeTargetIdentifier]);
                         }
                     }
@@ -152,7 +152,7 @@ class PolicyService
             }
             $everybodyRole->addPrivilege($privilegeTarget->createPrivilege(PrivilegeInterface::ABSTAIN));
         }
-        $this->roles['Neos.Flow:Everybody'] = $everybodyRole;
+        $this->roles['Neos.Security:Everybody'] = $everybodyRole;
 
         // Set parent roles
         /** @var Role $role */

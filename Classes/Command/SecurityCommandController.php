@@ -160,10 +160,10 @@ class SecurityCommandController extends CommandController
 	 */
 	public function showEffectivePolicyCommand($privilegeType, $roles = '')
 	{
-		$systemRoleIdentifiers = ['Neos.Flow:Everybody', 'Neos.Flow:Anonymous', 'Neos.Flow:AuthenticatedUser'];
+		$systemRoleIdentifiers = ['Neos.Security:Everybody', 'Neos.Security:Anonymous', 'Neos.Security:AuthenticatedUser'];
 
 		if (strpos($privilegeType, '\\') === false) {
-			$privilegeType = sprintf('\Neos\Flow\Security\Authorization\Privilege\%s\%sPrivilegeInterface', ucfirst($privilegeType), ucfirst($privilegeType));
+			$privilegeType = sprintf('\Neos\Security\Authorization\Privilege\%s\%sPrivilegeInterface', ucfirst($privilegeType), ucfirst($privilegeType));
 		}
 		if (!class_exists($privilegeType) && !interface_exists($privilegeType)) {
 			$this->outputLine('The privilege type "%s" was not defined.', [$privilegeType]);
@@ -193,11 +193,11 @@ class SecurityCommandController extends CommandController
 			}
 		}
 		if (count($requestedRoles) > 0) {
-			$requestedRoles['Neos.Flow:AuthenticatedUser'] = $this->policyService->getRole('Neos.Flow:AuthenticatedUser');
+			$requestedRoles['Neos.Security:AuthenticatedUser'] = $this->policyService->getRole('Neos.Security:AuthenticatedUser');
 		} else {
-			$requestedRoles['Neos.Flow:Anonymous'] = $this->policyService->getRole('Neos.Flow:Anonymous');
+			$requestedRoles['Neos.Security:Anonymous'] = $this->policyService->getRole('Neos.Security:Anonymous');
 		}
-		$requestedRoles['Neos.Flow:Everybody'] = $this->policyService->getRole('Neos.Flow:Everybody');
+		$requestedRoles['Neos.Security:Everybody'] = $this->policyService->getRole('Neos.Security:Everybody');
 
 		$this->outputLine('Effective Permissions for the roles <b>%s</b> ', [implode(', ', $requestedRoles)]);
 		$this->outputLine(str_repeat('-', $this->output->getMaximumLineLength()));
